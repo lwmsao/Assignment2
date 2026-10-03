@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetViz - Protocol Visualizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        #sec-visualizer.active { display: grid !important; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .slide-in { animation: slideIn 0.3s ease-out forwards; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col selection:bg-indigo-500/30">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800 p-4 shadow-xl">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 flex items-center gap-2 cursor-pointer" onclick="navigate('home')">
+                <i class="fa-solid fa-network-wired text-indigo-400"></i> NetViz
+            </div>
+            <div class="flex gap-6 text-sm font-semibold">
+                <button onclick="navigate('home')" class="hover:text-indigo-400 transition">Home</button>
+                <button onclick="navigate('about')" class="hover:text-indigo-400 transition">About the Project</button>
+                <button onclick="navigate('cit')" class="hover:text-indigo-400 transition">CIT Kokrajhar</button>
+                <button onclick="navigate('contact')" class="hover:text-indigo-400 transition">Contact</button>
+            </div>
+            <div class="text-xs font-mono text-slate-300 border border-indigo-500/30 bg-indigo-500/10 px-3.5 py-1.5 rounded-full">
+                Developed by <span class="text-emerald-400 font-bold">Lwmsao</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl mx-auto w-full p-4 mt-4">
+        
+        <!-- HOME -->
+        <section id="sec-home" class="page-section active flex flex-col items-center justify-center text-center mt-20 space-y-6">
+            <div class="w-24 h-24 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-5xl shadow-[0_0_40px_rgba(79,70,229,0.4)] mb-4">
+                <i class="fa-solid fa-globe text-white"></i>
+            </div>
+            <h1 class="text-5xl font-extrabold text-white">Welcome to <span class="text-indigo-400">NetViz</span></h1>
+            <p class="text-slate-400 max-w-2xl text-lg">
+                An interactive educational dashboard designed to demystify Application and Transport Layer protocols.
+            </p>
+            <button onclick="navigate('visualizer')" class="mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 px-10 rounded-full shadow-lg transition transform hover:scale-105 flex items-center gap-3 text-lg">
+                <i class="fa-solid fa-rocket"></i> Launch Visualizer
+            </button>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="sec-about" class="page-section max-w-3xl mx-auto bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl mt-6">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-6 border-b border-slate-800 pb-3"><i class="fa-solid fa-circle-info"></i> About the Project</h2>
+            <div class="space-y-4 text-slate-300 leading-relaxed">
+                <p><strong>NetViz</strong> is an advanced protocol visualizer built for Computer Networks assignments.</p>
+                <p>It maps high-level application user actions (Browsing, Mail, Streaming) to Application-Layer protocols (DNS, HTTP, SMTP) and Transport-Layer protocols (TCP handshakes, segments, UDP).</p>
+                <div class="mt-6 p-4 bg-slate-950 border-l-4 border-emerald-500 rounded-r-xl">
+                    <h4 class="text-emerald-400 font-bold mb-1"><i class="fa-solid fa-robot"></i> AI Assistance Note</h4>
+                    <p class="text-sm text-slate-400">Developed with assistance from Google Gemini for architecture, logic synchronization, and UI design.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CIT KOKRAJHAR -->
+        <section id="sec-cit" class="page-section max-w-3xl mx-auto bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl mt-6">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-6 border-b border-slate-800 pb-3"><i class="fa-solid fa-building-columns"></i> CIT Kokrajhar</h2>
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex-1 space-y-3 text-slate-300">
+                    <p><strong>Central Institute of Technology (CIT) Kokrajhar</strong> is a premier engineering institution under the Ministry of Education, Government of India.</p>
+                    <p>Located in Kokrajhar, Assam, it fosters technical education and regional development.</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col items-center justify-center text-center">
+                    <i class="fa-solid fa-map-location-dot text-3xl text-indigo-400 mb-2"></i>
+                    <p class="text-xs text-slate-400">Kokrajhar, BTAD, Assam - 783370</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="sec-contact" class="page-section max-w-md mx-auto bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl mt-6">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-6 border-b border-slate-800 pb-3"><i class="fa-solid fa-address-card"></i> Contact</h2>
+            <div class="space-y-4">
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center gap-4">
+                    <i class="fa-solid fa-envelope text-indigo-400 text-xl"></i>
+                    <div>
+                        <p class="text-xs text-slate-500 uppercase font-bold">Email</p>
+                        <a href="mailto:u24cse1036@cit.ac.in" class="text-white hover:text-indigo-400 font-medium">u24cse1036@cit.ac.in</a>
+                    </div>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center gap-4">
+                    <i class="fa-solid fa-phone text-emerald-400 text-xl"></i>
+                    <div>
+                        <p class="text-xs text-slate-500 uppercase font-bold">Phone</p>
+                        <p class="text-white font-medium">7577078090</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISUALIZER DASHBOARD -->
+        <section id="sec-visualizer" class="page-section grid-cols-1 lg:grid-cols-2 gap-6 mt-2">
+            
+            <!-- Left Panel -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg font-semibold border-b border-slate-800 pb-2 text-indigo-300 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders"></i> Activity Controls
+                    </h2>
+                    
+                    <div class="flex gap-2 my-4 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
+                        <button id="tab-browsing" onclick="selectTab('browsing')" class="flex-1 py-2 text-sm font-semibold rounded-lg bg-indigo-600 text-white transition">Browsing</button>
+                        <button id="tab-mail" onclick="selectTab('mail')" class="flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition">Mail</button>
+                        <button id="tab-streaming" onclick="selectTab('streaming')" class="flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition">Streaming</button>
+                    </div>
+
+                    <div id="form-browsing" class="space-y-3">
+                        <label class="block text-xs font-bold text-slate-400 uppercase">Target Domain</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="browse-url" value="example.com" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm w-full font-mono focus:outline-none focus:border-indigo-500">
+                            <button onclick="triggerActivity('browsing')" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2">Visit</button>
+                        </div>
+                    </div>
+
+                    <div id="form-mail" class="space-y-3 hidden">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase">To Recipient</label>
+                            <input type="email" id="mail-to" value="alice@company.org" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm w-full font-mono focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase">Subject</label>
+                            <input type="text" id="mail-subject" value="Project Update" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm w-full focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <button onclick="triggerActivity('mail')" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5 rounded-xl text-sm font-bold w-full flex items-center justify-center gap-2">Send Email</button>
+                    </div>
+
+                    <div id="form-streaming" class="space-y-3 hidden">
+                        <label class="block text-xs font-bold text-slate-400 uppercase">Quality</label>
+                        <select id="stream-quality" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm w-full font-mono focus:outline-none focus:border-indigo-500">
+                            <option value="1080p">1080p Full HD (5.0 Mbps)</option>
+                            <option value="720p">720p HD (2.5 Mbps)</option>
+                            <option value="480p">480p SD (0.8 Mbps)</option>
+                        </select>
+                        <button onclick="triggerActivity('streaming')" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5 rounded-xl text-sm font-bold w-full flex items-center justify-center gap-2">Start Stream</button>
+                    </div>
+                </div>
+
+                <div class="mt-6 border-t border-slate-800 pt-3">
+                    <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Console Log</span>
+                    <div id="activity-console" class="bg-slate-950 p-3 rounded-xl text-xs font-mono text-emerald-400 border border-slate-800 min-h-[60px]">Ready.</div>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2 mb-3">
+                        <h2 class="text-lg font-semibold text-indigo-300">Protocol Visualizer</h2>
+                        <div class="flex gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800">
+                            <button id="layer-app" onclick="switchLayer('app')" class="px-3 py-1 text-xs font-bold rounded-lg bg-indigo-600 text-white">Application</button>
+                            <button id="layer-trans" onclick="switchLayer('transport')" class="px-3 py-1 text-xs font-bold rounded-lg text-slate-400 hover:text-white">Transport</button>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-3">
+                        <span id="layer-title" class="text-xs font-bold text-indigo-300 uppercase">Application Level</span>
+                        <span id="step-indicator" class="text-xs bg-slate-800 px-2.5 py-1 rounded-full text-slate-300 font-mono">Step 0 / 0</span>
+                    </div>
+
+                    <div class="flex justify-center gap-2 my-3">
+                        <button onclick="prevStep()" class="bg-slate-800 hover:bg-slate-700 px-3.5 py-1.5 rounded-lg text-xs font-bold"><i class="fa-solid fa-backward"></i></button>
+                        <button id="play-pause-btn" onclick="togglePlayPause()" class="bg-emerald-600 hover:bg-emerald-500 px-4 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2"><i class="fa-solid fa-play"></i> Auto Play</button>
+                        <button onclick="nextStep()" class="bg-slate-800 hover:bg-slate-700 px-3.5 py-1.5 rounded-lg text-xs font-bold"><i class="fa-solid fa-forward"></i></button>
+                        <button onclick="replaySequence()" class="bg-slate-800 hover:bg-slate-700 px-3.5 py-1.5 rounded-lg text-xs font-bold"><i class="fa-solid fa-rotate-right"></i></button>
+                    </div>
+
+                    <div id="visualization-box" class="bg-slate-950 border border-slate-800 rounded-xl p-4 min-h-[250px] flex items-center justify-center">
+                        <div class="text-center text-slate-500 text-sm">Select an activity on the left to start.</div>
+                    </div>
+                </div>
+
+                <div class="mt-4 border-t border-slate-800 pt-3">
+                    <span class="text-xs font-bold text-slate-500 uppercase block mb-2">Timeline</span>
+                    <div id="timeline-list" class="max-h-[110px] overflow-y-auto space-y-1 text-xs font-mono pr-1">
+                        <div class="text-slate-600 italic text-center">Timeline empty</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function navigate(section) {
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            const target = document.getElementById(`sec-${section}`);
+            if (target) target.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        let currentTab = 'browsing';
+        let protocolData = { app: [], transport: [] };
+        let activeLayer = 'app';
+        let currentIndex = { app: -1, transport: -1 };
+        let autoPlayTimer = null;
+
+        function selectTab(tab) {
+            currentTab = tab;
+            ['browsing', 'mail', 'streaming'].forEach(t => {
+                document.getElementById(`form-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).className = "flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition";
+            });
+            document.getElementById(`form-${tab}`).classList.remove('hidden');
+            document.getElementById(`tab-${tab}`).className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-indigo-600 text-white transition";
+        }
+
+        function switchLayer(layer) {
+            pauseAutoPlay();
+            activeLayer = layer;
+            document.getElementById('layer-app').className = layer === 'app' ? "px-3 py-1 text-xs font-bold rounded-lg bg-indigo-600 text-white" : "px-3 py-1 text-xs font-bold rounded-lg text-slate-400 hover:text-white";
+            document.getElementById('layer-trans').className = layer === 'transport' ? "px-3 py-1 text-xs font-bold rounded-lg bg-indigo-600 text-white" : "px-3 py-1 text-xs font-bold rounded-lg text-slate-400 hover:text-white";
+            document.getElementById('layer-title').innerText = layer === 'app' ? "Application Level" : "Transport Level (TCP/UDP)";
+            renderStep();
+            renderTimeline();
+        }
+
+        function generateData(activity) {
+            let data = { app: [], transport: [] };
+            if (activity === 'browsing') {
+                const domain = document.getElementById('browse-url').value || 'example.com';
+                data.app = [
+                    { step: 1, protocol: "DNS", direction: "Client → DNS Server", message: `DNS Query: A ${domain}`, details: "Querying IP address.", highlight: "Domain translation." },
+                    { step: 2, protocol: "DNS", direction: "DNS Server → Client", message: `DNS Response: 93.184.216.34`, details: "IP resolved.", highlight: "Resolved IP." },
+                    { step: 3, protocol: "HTTP", direction: "Client → Web Server", message: "GET / HTTP/1.1", details: `Host: ${domain}`, highlight: "HTTP Request." },
+                    { step: 4, protocol: "HTTP", direction: "Web Server → Client", message: "HTTP/1.1 200 OK", details: "HTML payload returned.", highlight: "Webpage loaded." }
+                ];
+                data.transport = [
+                    { step: 1, protocol: "TCP", direction: "Client → Server", message: "[SYN] Seq=0 Win=64240", details: "Handshake start.", highlight: "SYN Flag." },
+                    { step: 2, protocol: "TCP", direction: "Server → Client", message: "[SYN, ACK] Seq=0 Ack=1", details: "Handshake middle.", highlight: "SYN-ACK." },
+                    { step: 3, protocol: "TCP", direction: "Client → Server", message: "[ACK] Seq=1 Ack=1", details: "Handshake complete.", highlight: "Connection Established." },
+                    { step: 4, protocol: "TCP", direction: "Client → Server", message: "[PSH, ACK] Seq=1 Ack=1 Len=400", details: "HTTP GET payload.", highlight: "Data transfer." },
+                    { step: 5, protocol: "TCP", direction: "Server → Client", message: "[FIN, ACK] Seq=401 Ack=1257", details: "Teardown start.", highlight: "FIN Flag." }
+                ];
+            } else if (activity === 'mail') {
+                const to = document.getElementById('mail-to').value;
+                data.app = [
+                    { step: 1, protocol: "SMTP", direction: "Client → Server", message: "EHLO client.local", details: "Greeting.", highlight: "EHLO command." },
+                    { step: 2, protocol: "SMTP", direction: "Server → Client", message: "250 OK", details: "Accepted.", highlight: "Server ready." },
+                    { step: 3, protocol: "SMTP", direction: "Client → Server", message: `RCPT TO:<${to}>`, details: "Recipient set.", highlight: "Recipient set." },
+                    { step: 4, protocol: "SMTP", direction: "Client → Server", message: "DATA", details: "Payload request.", highlight: "DATA command." },
+                    { step: 5, protocol: "SMTP", direction: "Client → Server", message: "QUIT", details: "Disconnect.", highlight: "Session close." }
+                ];
+                data.transport = [
+                    { step: 1, protocol: "TCP", direction: "Client → Server", message: "[SYN] Seq=0 port 25", details: "TCP Port 25 Start.", highlight: "TCP Handshake." },
+                    { step: 2, protocol: "TCP", direction: "Server → Client", message: "[SYN, ACK] Seq=0 Ack=1", details: "Acknowledged.", highlight: "SYN-ACK." },
+                    { step: 3, protocol: "TCP", direction: "Client → Server", message: "[ACK] Seq=1 Ack=1", details: "Connected.", highlight: "Connected." },
+                    { step: 4, protocol: "TCP", direction: "Client → Server", message: "[PSH, ACK] SMTP Stream", details: "Carrying SMTP commands.", highlight: "Stream Payload." }
+                ];
+            } else if (activity === 'streaming') {
+                const q = document.getElementById('stream-quality').value;
+                data.app = [
+                    { step: 1, protocol: "HTTP", direction: "Client → CDN", message: "GET /master.m3u8", details: "Playlist request.", highlight: "Manifest." },
+                    { step: 2, protocol: "HTTP", direction: "CDN → Client", message: "200 OK (Playlist)", details: `Quality ${q} selected.`, highlight: "Quality selected." },
+                    { step: 3, protocol: "HTTP", direction: "Client → CDN", message: `GET /segment1.ts`, details: "Chunk fetch.", highlight: "Fetching chunk." }
+                ];
+                data.transport = [
+                    { step: 1, protocol: "TCP", direction: "Client → CDN", message: "[SYN] Seq=0", details: "TCP Handshake.", highlight: "Handshake." },
+                    { step: 2, protocol: "TCP", direction: "CDN → Client", message: "[SYN, ACK]", details: "Acknowledged.", highlight: "Connected." },
+                    { step: 3, protocol: "TCP", direction: "CDN → Client", message: "[PSH, ACK] Binary Chunks", details: "MSS Chunk delivery.", highlight: "Flow Control Stream." }
+                ];
+            }
+            return data;
+        }
+
+        function triggerActivity(activity) {
+            pauseAutoPlay();
+            protocolData = generateData(activity);
+            currentIndex = { app: 0, transport: 0 };
+            document.getElementById('activity-console').innerText = `[LOG]: Executing ${activity} activity.`;
+            renderStep();
+            renderTimeline();
+        }
+
+        function renderStep() {
+            const arr = protocolData[activeLayer];
+            const idx = currentIndex[activeLayer];
+            if (!arr || arr.length === 0 || idx < 0) return;
+            const item = arr[idx];
+            document.getElementById('step-indicator').innerText = `Step ${idx + 1} / ${arr.length}`;
+
+            document.getElementById('visualization-box').innerHTML = `
+                <div class="space-y-3 w-full slide-in">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-indigo-400 bg-indigo-950 px-2.5 py-0.5 rounded font-mono">${item.protocol}</span>
+                        <span class="text-xs text-slate-400 font-mono">${item.direction}</span>
+                    </div>
+                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 font-mono text-sm text-indigo-200">${item.message}</div>
+                    <div class="text-xs text-slate-300 font-mono bg-slate-950 p-2.5 rounded-xl border border-slate-800">${item.details}</div>
+                    <div class="text-xs text-emerald-400 font-semibold"><i class="fa-solid fa-bolt"></i> ${item.highlight}</div>
+                </div>
+            `;
+            highlightTimeline();
+        }
+
+        function renderTimeline() {
+            const arr = protocolData[activeLayer];
+            document.getElementById('timeline-list').innerHTML = arr.map((item, idx) => `
+                <div id="tl-step-${idx}" onclick="jumpToStep(${idx})" class="p-1.5 rounded-lg cursor-pointer transition flex justify-between items-center text-slate-400 hover:bg-slate-800">
+                    <span>${idx + 1}. [${item.protocol}] ${item.message}</span>
+                </div>
+            `).join('');
+            highlightTimeline();
+        }
+
+        function highlightTimeline() {
+            const arr = protocolData[activeLayer];
+            arr.forEach((_, idx) => {
+                const el = document.getElementById(`tl-step-${idx}`);
+                if (el) {
+                    el.className = idx === currentIndex[activeLayer]
+                        ? "p-1.5 rounded-lg cursor-pointer bg-indigo-950 border border-indigo-700 text-indigo-200 font-bold flex justify-between items-center text-xs"
+                        : "p-1.5 rounded-lg cursor-pointer hover:bg-slate-800 text-slate-400 flex justify-between items-center text-xs";
+                }
+            });
+        }
+
+        function jumpToStep(idx) { pauseAutoPlay(); currentIndex[activeLayer] = idx; renderStep(); }
+        function nextStep() { if (currentIndex[activeLayer] < protocolData[activeLayer].length - 1) { currentIndex[activeLayer]++; renderStep(); } else pauseAutoPlay(); }
+        function prevStep() { if (currentIndex[activeLayer] > 0) { currentIndex[activeLayer]--; renderStep(); } }
+        function replaySequence() { pauseAutoPlay(); currentIndex[activeLayer] = 0; renderStep(); }
+
+        function togglePlayPause() {
+            if (autoPlayTimer) pauseAutoPlay();
+            else {
+                const arr = protocolData[activeLayer];
+                if (arr.length === 0) return;
+                if (currentIndex[activeLayer] >= arr.length - 1) currentIndex[activeLayer] = 0;
+                document.getElementById('play-pause-btn').innerHTML = `<i class="fa-solid fa-pause"></i> Pause`;
+                autoPlayTimer = setInterval(() => { currentIndex[activeLayer] < arr.length - 1 ? nextStep() : pauseAutoPlay(); }, 1800);
+            }
+        }
+
+        function pauseAutoPlay() {
+            if (autoPlayTimer) { clearInterval(autoPlayTimer); autoPlayTimer = null; }
+            document.getElementById('play-pause-btn').innerHTML = `<i class="fa-solid fa-play"></i> Auto Play`;
+        }
+    </script>
+</body>
+</html>
